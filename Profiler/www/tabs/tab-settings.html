@@ -1,0 +1,60 @@
+<ion-view view-title="SETTINGS">
+  <ion-content>
+  	<button  class="button button-large button-full button-positive icon-left ion-wand" ng-click="surveySettingsForm = !surveySettingsForm">
+    	Survey Settings
+    </button>
+    <div class="animate-show" ng-hide="surveySettingsForm">
+		<label class="item item-input item-stacked-label">
+			<div class="input-label" >AREA OF SURVEY</div>
+		</label>
+
+    <label class="item item-input item-stacked-label item-select">
+      <select ng-model="surveySettings.AOS" ng-click="loadArea()" ng-options="resArea.resname for resArea in surveyAreaList" >
+        <!-- <option ng-repeat="area in surveyAreaList" value="{{(area.resname + area.rid)}}" >{{area.resname}}</option> -->
+      </select>
+    </label>
+		<label class="item item-input item-stacked-label">
+			<div class="input-label" >AREA COORDINATOR</div>
+			<input type="text" placeholder="" ng-model="surveySettings.AC">
+		</label><br>
+      	<button  class="button button-small button-full button-positive"  ng-click="surveySettingsForm = !surveySettingsForm; surveySettingsSave()">
+      	SAVE
+      	</button>	
+    </div>
+  	<button  class="button button-large button-full button-positive icon-left ion-android-sync" ng-click="uploadSettingsForm = !uploadSettingsForm; adminOptions()">
+    	Sync
+    </button>  	
+
+
+    <div class="animate-show" ng-hide="uploadSettingsForm" >
+		<label class="item item-input item-stacked-label">
+			<div class="input-label" >SERVER IP ADDRESS</div>
+			<input type="text" placeholder="" ng-model="newDomain">
+		</label>
+		<label class="item item-input item-stacked-label">
+			<div class="input-label" >Status: {{serverStatus}}</div>
+		</label><br>
+    
+        <button  class="button button-small button-full button-positive"  ng-click="changeDomain(newDomain)">
+          Set IP Address and Test Connection
+        </button>    
+
+        <button  class="button button-small button-full button-positive"  ng-click="syncRes()">
+          Sync Resettelment Area (Local)
+        </button> 
+
+        <button  class="button button-small button-full button-balanced"  ng-click="syncDB()" ng-show="ShowAdminButton">
+        	Sync Profiles to Remote Server
+      	</button>
+          <h3 ng-show="ShowAdminButton">Success House Count: {{successCounter}}</h3>
+          <h3 ng-show="ShowAdminButton">Total Member Count: {{memberCount}}</h3>
+          <h3 ng-show="ShowAdminButton">Success Member Count: {{memberSucCount}}</h3>
+        <button class="button button-small button-full button-assertive" ng-click="purge()" ng-show="ShowAdminButton">
+          Delete Database
+        </button>
+    </div>    
+    <!-- <button class="button button-full" ng-click="purge()">Purge Database!</button> -->
+  </ion-content>
+</ion-view>
+
+
